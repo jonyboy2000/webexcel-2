@@ -11,20 +11,7 @@ public class UpCell extends HttpServlet {
     {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        out.println("<html>");
-        out.println("<body>");
-        out.println("<head>");
-        out.println("<title>Request Information Example</title>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<h3>Request Information Example</h3>");
-        out.println("Method: " + request.getMethod());
-        out.println("Request URI: " + request.getRequestURI());
-        out.println("Protocol: " + request.getProtocol());
-        out.println("PathInfo: " + request.getPathInfo());
-        out.println("Remote Address: " + request.getRemoteAddr());
-        out.println("</body>");
-        out.println("</html>");
+        out.print("{\"result\":1,\"values\":[{\"row\":3,\"col\":5,\"value\":\"10\"}]}");
     }
 
     /**

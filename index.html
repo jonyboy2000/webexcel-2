@@ -83,9 +83,12 @@
                 data: data,
                 type: 'post'
               }).done(function( ret ) {
-                    console.log(ret);
+                    obj = JSON.parse(ret);
+                    for (var value in obj.values){
+                        v = obj.values[value]
+                        table.cells[v["row"]+","+v["col"]].innerHTML=v["value"];
+                    } 
               });
-              console.log(JSON.stringify(data));
 
               el.blur();
               event.preventDefault();
@@ -95,7 +98,7 @@
 
     var painter = new fattable.Painter();
     painter.fillCell = function(cellDiv, data) {
-        cellDiv.innerHTML = "<b contenteditable>"+data.content+"</b>";
+        cellDiv.innerHTML = "<b id=\"cell_"+data.rowId+"_"+data.colId+"\" contenteditable>"+data.content+"</b>";
         cellDiv.userData=data
         cellDiv.removeEventListener("keydown", onCellKeyDown, false);
         cellDiv.addEventListener("keydown", onCellKeyDown, false);
@@ -116,7 +119,7 @@
     var tableData = new fattable.SyncTableModel();
     tableData.getCellSync = function(i,j) {
         return {
-            "content": "Cell " + i + "," + j,
+            "content": "",
             "rowId": i,
             "colId": j
         }
